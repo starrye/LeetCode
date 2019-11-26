@@ -19,7 +19,6 @@ num1 和num2 都不包含任何前导零。
 
 class Solution():
     def addStrings(self, num1, num2) -> str:
-
         max_num,min_num = ([ord(i)-48 for i in num1], [ord(j) - 48 for j in num2]) if len(num1) > len(num2) else \
             ([ord(i) - 48 for i in num2], [ord(j) - 48 for j in num1])
         carry = 0
