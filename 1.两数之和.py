@@ -14,11 +14,23 @@ class Solution
 """
 class Solution:
     def twoSum(self,nums,target):
+        # for i in range(len(nums)):
+        #     for j in range(i):
+        #         if nums[i] + nums[j] == target:
+        #             return [j,i]
+        # else:
+        #     return "查找失败"
+
+        d = {}
         for i in range(len(nums)):
-            for j in range(i):
-                if nums[i] + nums[j] == target:
-                    return [j,i]
-        else:
-            return "查找失败"
+            j = target -nums[i]
+            if j in d.keys():
+                res = [d[j], i]
+                break
+            d[nums[i]] = i
+        return res
+
+
+
 sun = Solution()
-print(sun.twoSum([2,7,11,5],9))
+print(sun.twoSum([3,3,3],6))
