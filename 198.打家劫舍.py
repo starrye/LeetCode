@@ -15,10 +15,28 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        last = 0
-        now = 0
+        # 动态规划简化版
+        last_max = 0
+        curr_max = 0
         for i in nums:
-            last,now= now,max(last+i,now)
-        return now
+            curr_max, last_max= max(last_max+i,curr_max), curr_max
+        return curr_max
+
+        # 动态规划思想详细版
+        # if len(nums) == 0:
+        #     return 0
+        # elif len(nums) == 1:
+        #     return nums[0]
+        # elif len(nums) == 2:
+        #     return max(nums[0], nums[1])
+        # import numpy as np
+        # opt = np.zeros(len(nums))
+        # len_arr = len(nums)
+        # opt[0] = nums[0]
+        # opt[1] = max(nums[0],nums[1])
+        # for i in range(2, len_arr):
+        #     opt[i] = max(opt[i-2]+nums[i], opt[i-1])
+        # return int(opt[-1])
+
 a = Solution()
-print(a.rob([2,1,1,2]))
+print(a.rob([2,7,9,3,1]))
