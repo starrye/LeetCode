@@ -41,15 +41,23 @@
 """
 a = ["a","a","b","b","c","c","c"]
 # b = []
-def xx(a):
-    lenth = len(a)
+def xx(chars):
     i = 0
-    while i <= lenth-1:
-        print(a.count(a[i]))
-        count = a.count(a[i])
-        if count > 1:
-            a = a[0:i-1]+list(str(count))+(a[count:lenth])
-            print(a)
-            i = i+len(str(count))+1
-
-xx(a)
+    count = 1
+    while i < len(chars)-1:
+        if chars[i] == chars[i+1]:
+            chars.pop(i+1)
+            count += 1
+        else:
+            if count == 1:
+                i += 1
+            else:
+                for count in list(str(count)):
+                    chars.insert(i+1, str(count))
+                    i += 1
+                count, i = 1, i+1
+    if count != 1:
+        chars.extend([str(x) for x in list(str(count))])
+    return chars
+a = xx(a)
+print(a)
