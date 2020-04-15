@@ -68,7 +68,7 @@ class Solution(object):
         # 返回集合长度
         return len(marked)
         """
-        # DFS
+        # DFS_BFS
         def dfs(i, j):
             nonlocal res
             # 如果坐标等于m与n 或者 坐标数列和已经大于k 或者 坐标已经在标记的集合中则返回
