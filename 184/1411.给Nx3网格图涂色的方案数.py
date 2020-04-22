@@ -64,6 +64,7 @@ class Solution(object):
         f[i][1]=2∗f[i−1][0]+3∗f[i−1][1]
         
         """
+        
         mod = 10 ** 9 + 7
         f1 = f2 = 6
         for i in range(2, n+1):
