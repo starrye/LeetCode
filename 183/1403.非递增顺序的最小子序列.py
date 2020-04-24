@@ -52,4 +52,5 @@ class Solution(object):
 
 
 a = Solution().minSubsequence([4,3,10,9,8])
-print(a)
+# print(a)
+
