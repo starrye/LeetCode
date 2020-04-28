@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 """
 @author: 
-@file: 2.py
+@file: 5393.可获得的最大点数.py
 @time: 2020/4/18 14:57
 @desc: 
 """

@@ -23,24 +23,27 @@
 ]
 """
 from typing import List
+import itertools
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        def travelback(tmp_list):
-            if len(tmp_list) == nums_length:
-                result.append(tmp_list[:])
-                return
-            for i in nums:
-                if i in tmp_list:
-                    continue
-                tmp_list.append(i)
-                travelback(tmp_list)
-                tmp_list.pop()
-        result = []
-        nums_length = len(nums)
-        travelback([])
-        return result
+        # def travelback(tmp_list):
+        #     if len(tmp_list) == nums_length:
+        #         result.append(tmp_list[:])
+        #         return
+        #     for i in nums:
+        #         if i in tmp_list:
+        #             continue
+        #         tmp_list.append(i)
+        #         travelback(tmp_list)
+        #         tmp_list.pop()
+        # result = []
+        # nums_length = len(nums)
+        # travelback([])
+        # return result
+
+        return list(itertools.permutations(nums))
 
 
-a = Solution().permute([1,2,3])
+a = Solution().permute([1,2,3,4])
 print(a)
