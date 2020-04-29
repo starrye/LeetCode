@@ -24,23 +24,16 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        if len(s) <= k:
-            return s[::-1]
-        elif k <= len(s) < 2*k:
-            return s[k-1::-1]+s[k:]
-        else:
-            s_new = ""
-            i = 0
-            # while i <=
-            print(s[i*k*2+k-1:i*k*2-1:-1])
-            for i in range(0, len(s)//(2*k)):
-                # 2 -- 3
-                # 0 1
-                print(s[i*k*2+k-1:i*k*2-1:-1]+s[i*k*2+k:i*k*2+k*2])
-                # s_new += s[k*i - 1::-1] + s[k*i:2 * k]
-            # s_new += s[len(s)-len(s) % (2*k):]
+        # s_new = ""
+        # for i in range(0, len(s), 2):
+        #     s_new += s[i*k:(i+1)*k][::-1] + s[(i+1)*k:(i+2)*k]
         # return s_new
 
+        s_new = ""
+        for i in range(0, len(s), 2*k):
+            s_new += s[i:i+k][::-1] + s[i+k:i+k*2]
+        return s_new
 
-a = Solution().reverseStr("abdcdefghij", 2)
+
+a = Solution().reverseStr("abcde", 5)
 print(a)
