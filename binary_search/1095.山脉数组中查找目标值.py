@@ -50,7 +50,6 @@ MountainArray.length() - 会返回该数组的长度
 # """
 # class MountainArray:
 #    def get(self, index: int) -> int:
-#        return
 #    def length(self) -> int:
 
 class Solution:
