@@ -17,3 +17,5 @@ def binary_search(nums,target):
             i = mid + 1
     return -1
 """
+# 在array的前index元素中寻找value值对应的索引(若没有该值，则返回应该插入的位置)
+bisect.bisect(array, value, hi=index)

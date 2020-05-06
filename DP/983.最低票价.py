@@ -6,6 +6,8 @@
 @time: 2020/5/6 09:54
 @desc: 
 """
+from bisect import bisect
+
 """
 在一个火车旅行很受欢迎的国度，你提前一年计划了一些火车旅行。在接下来的一年里，你要旅行的日子将以一个名为 days 的数组给出。每一项是一个从 1 到 365 的整数。
 火车票有三种不同的销售方式：
@@ -48,26 +50,31 @@ from typing import List
 
 class Solution:
     def mincostTickets(self, days: List[int], costs: List[int]) -> int:
-        # 创建初始列表
-        dp = [0] * (days[-1]+1)
-        # days的索引
-        next_day = 0
-        # 遍历dp为了更新dp值
-        for i in range(len(dp)):
-            # 当前天数不是days里面的天数 说明不用出行最小花费等于昨天即可
-            if i != days[next_day]:
-                dp[i] = dp[i-1]
-            else:
-                # 获取min（一天前 7天前 30天前 + 各自对应的花销)
-                dp[i] = min(dp[max(0, i-1)]+costs[0], dp[max(0, i-7)]+costs[1], dp[max(0, i-30)]+costs[2])
-                # days索引加1
-                next_day += 1
+        # # 创建初始列表
+        # dp = [0] * (days[-1]+1)
+        # # days的索引
+        # next_day = 0
+        # # 遍历dp为了更新dp值
+        # for i in range(len(dp)):
+        #     # 当前天数不是days里面的天数 说明不用出行最小花费等于昨天即可
+        #     if i != days[next_day]:
+        #         dp[i] = dp[i-1]
+        #     else:
+        #         # 获取min（一天前 7天前 30天前 + 各自对应的花销)
+        #         dp[i] = min(dp[max(0, i-1)]+costs[0], dp[max(0, i-7)]+costs[1], dp[max(0, i-30)]+costs[2])
+        #         # days索引加1
+        #         next_day += 1
+        # return dp[-1]
+
+        # 二分查找与dp
+        dp = [0]
+        for index, value in enumerate(days):
+            dp.append(min(dp[-1]+costs[0], dp[bisect(days, value-7, hi=index)]+costs[1], dp[bisect(days, value-30, hi=index)]+costs[2]))
         return dp[-1]
 
 
 a = Solution().mincostTickets([1,4,6,7,8,20], [2,7,15])
 print(a)
-
 
 
 
