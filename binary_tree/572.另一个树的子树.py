@@ -16,6 +16,7 @@ from typing import List
 给定的树 s:
 
      3
+     
     / \
    4   5
   / \
