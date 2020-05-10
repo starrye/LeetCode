@@ -32,19 +32,28 @@ from typing import List
 
 class Solution:
     def checkPossibility(self, nums: List[int]) -> bool:
-        for i in range(len(nums)-1):
+        need_change_num = False
+        for i in range(len(nums) - 1):
             if nums[i] > nums[i+1]:
-                if i == 0:
-                    nums[i] = nums[i+1]
-                elif nums[i-1] > nums[i+1]:
+                if need_change_num:
+                    return False
+                need_change_num = True
+                if i != 0 and nums[i-1] > nums[i+1]:
                     nums[i+1] = nums[i]
-                elif nums[i-1] < nums[i+1]:
-                    nums[i] = nums[i+1]
-                break
-        for i in range(len(nums)-1):
-            if nums[i] > nums[i+1]:
-                return False
         return True
+        # for i in range(len(nums)-1):
+        #     if nums[i] > nums[i+1]:
+        #         if i == 0:
+        #             nums[i] = nums[i+1]
+        #         elif nums[i-1] > nums[i+1]:
+        #             nums[i+1] = nums[i]
+        #         elif nums[i-1] < nums[i+1]:
+        #             nums[i] = nums[i+1]
+        #         break
+        # for i in range(len(nums)-1):
+        #     if nums[i] > nums[i+1]:
+        #         return False
+        # return True
 
 
 a = Solution().checkPossibility([4,2,3])

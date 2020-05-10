@@ -22,7 +22,6 @@ import re
 #         if dp[0]+dp[0] < su:
 #             return "Bob"
 #         elif dp[0]+dp[0]>su:
-a = [1,1]
-a.remove(1)
-print(a)
+a = 0
+print(~a)
 
