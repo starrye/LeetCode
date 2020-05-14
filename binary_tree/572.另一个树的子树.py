@@ -8,6 +8,7 @@
 """
 import json
 from typing import List
+from binary_tree.tree import stringToTreeNode
 #!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 """
@@ -46,8 +47,6 @@ from typing import List
 返回 false。
 """
 
-
-# Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -74,6 +73,8 @@ class Solution:
         self.s = self.preScan([],s)
         if len(self.t) == len(self.s):
             return self.s == self.t
+        print(self.t)
+        print(self.s)
         if "-".join(self.t) in "-".join(self.s):
             return True
         return False
@@ -88,6 +89,9 @@ class Solution:
         return retList
 
 
-
+s = stringToTreeNode([3,4,5,1,2])
+t = stringToTreeNode([4,1,2])
+a = Solution().isSubtree(s, t)
+print(a)
 
 

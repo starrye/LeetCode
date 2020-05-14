@@ -7,7 +7,7 @@
 @desc: 
 """
 import json
-
+from binary_tree.tree import stringToTreeNode
 """
 给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
 
@@ -24,13 +24,6 @@ import json
   5     4       <---
 """
 
-
-# Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
 
 class Solution(object):
     def rightSideView(self, root):
@@ -63,54 +56,9 @@ class Solution(object):
         return res
 
 
-def stringToTreeNode(input):
-    inputValues = [s.strip() for s in input]
-    root = TreeNode(int(inputValues[0]))
-    nodeQueue = [root]
-    front = 0
-    index = 1
-    while index < len(inputValues):
-        node = nodeQueue[front]
-        front = front + 1
+root = stringToTreeNode([1,2,3,"null",5,"null",4])
+ret = Solution().rightSideView(root)
 
-        item = inputValues[index]
-        index = index + 1
-        if item != "null":
-            leftNumber = int(item)
-            node.left = TreeNode(leftNumber)
-            nodeQueue.append(node.left)
-
-        if index >= len(inputValues):
-            break
-
-        item = inputValues[index]
-        index = index + 1
-        if item != "null":
-            rightNumber = int(item)
-            node.right = TreeNode(rightNumber)
-            nodeQueue.append(node.right)
-    return root
-
-
-def integerListToString(nums, len_of_list=None):
-    if not len_of_list:
-        len_of_list = len(nums)
-    return json.dumps(nums[:len_of_list])
-
-
-def main():
-    try:
-        root = stringToTreeNode(["1","2","3","null","5","null","4"])
-
-        ret = Solution().rightSideView(root)
-
-        out = integerListToString(ret)
-        print(out)
-    except StopIteration:
-        pass
-
-
-if __name__ == '__main__':
-    main()
+print(ret)
 
 

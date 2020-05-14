@@ -29,7 +29,7 @@ from typing import List
 所有节点的值都是唯一的。
 p、q 为不同节点且均存在于给定的二叉树中。
 """
-
+from binary_tree.tree import stringToTreeNode
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -57,3 +57,7 @@ class Solution:
             l1 = relation_dic[l1, q]
             l2 = relation_dic[l2, p]
         return l1
+
+root = stringToTreeNode([3,5,1,6,2,0,8,"null","null",7,4])
+a = Solution().lowestCommonAncestor(root, 5, 1)
+print(a)
