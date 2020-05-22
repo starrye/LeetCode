@@ -28,12 +28,21 @@ from binary_tree.tree import stringToTreeNode
     /  \
    15   7
 """
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
+        
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        for root in range(len(preorder)-1):
-            self.val = preorder[root]
-            self.left = inorder[:root]
-            self.right = inorder[root+1:]
+        if not preorder or not inorder:
+            return
+        root = TreeNode(preorder[0])
+        root_index = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:root_index + 1], inorder[:root_index])
+        root.right = self.buildTree(preorder[root_index + 1:], inorder[root_index + 1:])
+        return root
 
 
