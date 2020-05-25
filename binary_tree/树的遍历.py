@@ -50,24 +50,24 @@ def level_queue(self, root):
 
 # 迭代 推荐！！
 def front_diedai(self, root: TreeNode):
-    stack, res = [root], []
+    stack, result = [root], []
     while stack:
         i = stack.pop()
         if isinstance(i, TreeNode):
             stack.extend([i.right, i.left, i.val])
         elif isinstance(i, int):
-            res.append(i)
-    return res
+            result.append(i)
+    return result
 
 def middle_diedai(self, root: TreeNode):
-    stack, res = [root], []
+    stack, result = [root], []
     while stack:
         i = stack.pop()
         if isinstance(i, TreeNode):
             stack.extend([i.right, i.val, i.left])
         elif isinstance(i, int):
-            res.append(i)
-    return res
+            result.append(i)
+    return result
 
 def later_diedai(self, root: TreeNode):
     stack, res = [root], []

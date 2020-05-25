@@ -34,7 +34,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-        
+
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         if not preorder or not inorder:
