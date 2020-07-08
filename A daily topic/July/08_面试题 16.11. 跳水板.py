@@ -29,6 +29,19 @@ class Solution:
     def divingBoard(self, shorter: int, longer: int, k: int) -> List[int]:
         if k == 0:
             return []
+        min_len = shorter * k
         if shorter == longer:
-            return [shorter * k]
-        return [(shorter * (k - i) + longer * i) for i in range(k + 1)]
+            return [min_len]
+        # return [(shorter * (k - i) + longer * i) for i in range(k + 1)]
+        result = [min_len]
+        max_len = longer * k
+        difference = longer - shorter
+        # 等差数列 (shorter * (k - i) + longer * i) 等同于在上次的基础上去掉较短的 增加一个较长的 所以每次增加 (长-短)
+        while min_len != max_len:
+            min_len += difference
+            result.append(min_len)
+        return result
+
+
+a = Solution().divingBoard(1,2,3)
+print(a)
