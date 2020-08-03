@@ -19,26 +19,37 @@ num1 和num2 都不包含任何前导零。
 
 class Solution():
     def addStrings(self, num1, num2) -> str:
-        max_num,min_num = ([ord(i)-48 for i in num1], [ord(j) - 48 for j in num2]) if len(num1) > len(num2) else \
-            ([ord(i) - 48 for i in num2], [ord(j) - 48 for j in num1])
-        carry = 0
-        for i in range(-1, -len(min_num)-1, -1):
-            max_num[i] += min_num[i] + carry
-            if max_num[i] >= 10:
-                max_num[i] -= 10
-                carry = 1
-            else:
-                carry = 0
-        if not carry:
-            return ''.join(str(i) for i in max_num)
-        for i in range(-len(min_num)-1, -len(max_num)-1, -1):
-            max_num[i] += carry
-            if max_num[i] >= 10:
-                max_num[i] -= 10
-                carry = 1
-            else:
-                return ''.join(str(i) for i in max_num)
-        return '1' + ''.join(str(i) for i in max_num)
+        # max_num,min_num = ([ord(i)-48 for i in num1], [ord(j) - 48 for j in num2]) if len(num1) > len(num2) else \
+        #     ([ord(i) - 48 for i in num2], [ord(j) - 48 for j in num1])
+        # carry = 0
+        # for i in range(-1, -len(min_num)-1, -1):
+        #     max_num[i] += min_num[i] + carry
+        #     if max_num[i] >= 10:
+        #         max_num[i] -= 10
+        #         carry = 1
+        #     else:
+        #         carry = 0
+        # if not carry:
+        #     return ''.join(str(i) for i in max_num)
+        # for i in range(-len(min_num)-1, -len(max_num)-1, -1):
+        #     max_num[i] += carry
+        #     if max_num[i] >= 10:
+        #         max_num[i] -= 10
+        #         carry = 1
+        #     else:
+        #         return ''.join(str(i) for i in max_num)
+        # return '1' + ''.join(str(i) for i in max_num)
+
+        res = ""
+        i, j, carry = len(num1) - 1, len(num2) - 1, 0
+        while i >= 0 or j >= 0:
+            n1 = int(num1[i]) if i >= 0 else 0
+            n2 = int(num2[j]) if j >= 0 else 0
+            tmp = n1 + n2 + carry
+            carry = tmp // 10
+            res = str(tmp % 10) + res
+            i, j = i - 1, j - 1
+        return "1" + res if carry else res
 
 
 a = Solution().addStrings('12345', '12345')

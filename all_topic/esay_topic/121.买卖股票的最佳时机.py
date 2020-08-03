@@ -48,4 +48,5 @@ class Solution:
         dp[0] = 0
         dp[1] = prices[1] - prices[0] if prices[1] > prices[0] else 0
         for i in range(1, len(prices)):
-            if prices[i]
+            if prices[i] > prices[i-1]:
+                dp[i] = prices[i] - prices[i-1]
