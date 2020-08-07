@@ -27,6 +27,13 @@ from typing import List
 
 """
 
+"""
+二分法的思路是先猜一个数（有效范围 [left, right]里的中间数 mid），
+然后统计原始数组中小于等于这个中间数的元素的个数 cnt，
+如果 cnt 严格大于 mid，（注意我加了着重号的部分「小于等于」、「严格大于」）。
+根据抽屉原理，重复元素就在区间 [left, mid] 里
+
+"""
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
@@ -44,3 +51,6 @@ class Solution:
             else:
                 i = mid + 1
         return i
+
+a = Solution().findDuplicate([3, 3, 1 ,4, 2])
+print(a)
