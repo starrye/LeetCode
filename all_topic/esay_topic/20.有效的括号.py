@@ -27,28 +27,39 @@ class Solution:
         :type s: str
         :rtype: bool
         """
-        stack = []
-        balanced = True
-        index = 0
-        while index < len(s) and balanced:
-            if s[index] in '([{':
-                stack.append(s[index])
-            else:
-                if len(stack) == 0:
-                    balanced = False
-                else:
-                    top = stack.pop()
-                    balanced = match(top,s[index])
-            index += 1
-        if balanced and len(stack) == 0:
-            return True
-        else:
-            return False
+        # stack = []
+        # balanced = True
+        # index = 0
+        # while index < len(s) and balanced:
+        #     if s[index] in '([{':
+        #         stack.append(s[index])
+        #     else:
+        #         if len(stack) == 0:
+        #             balanced = False
+        #         else:
+        #             top = stack.pop()
+        #             balanced = match(top,s[index])
+        #     index += 1
+        # if balanced and len(stack) == 0:
+        #     return True
+        # else:
+        #     return False
 
-def match(open,close):
-    opens = '([{'
-    closes = ')]}'
-    return opens.index(open) == closes.index(close)
+# def match(open,close):
+#     opens = '([{'
+#     closes = ')]}'
+#     return opens.index(open) == closes.index(close)
+
+        stack = []
+        dict_ = {")": "(", "}": "{", "]": "["}
+        for i in s:
+            if i in dict_.values():
+                stack.append(i)
+            else:
+                if not stack or stack[-1] != dict_[i]:
+                    return False
+                stack.pop()
+        return len(stack) == 0
 
 s = Solution()
 print(s.isValid('{{([][])}()}'))
