@@ -42,11 +42,14 @@ class Solution:
         #         return 0
         #     return maxprofit
         # dp
-        if len(prices) == 1 or len(prices) == 0:
-            return 0
-        dp = [0]*len(prices)
-        dp[0] = 0
-        dp[1] = prices[1] - prices[0] if prices[1] > prices[0] else 0
-        for i in range(1, len(prices)):
-            if prices[i] > prices[i-1]:
-                dp[i] = prices[i] - prices[i-1]
+        min_price = float("+inf")
+        max_profit = 0
+        for i in prices:
+            max_profit = max(i - min_price, max_profit)
+            min_price = min(i, min_price)
+        return max_profit
+
+
+a = Solution().maxProfit([7,1,5,3,6,4])
+print(a)
+
