@@ -42,12 +42,20 @@ class Solution:
         #         return 0
         #     return maxprofit
         # dp
-        min_price = float("+inf")
-        max_profit = 0
+        # min_price = float("+inf")
+        # max_profit = 0
+        # for i in prices:
+        #     max_profit = max(i - min_price, max_profit)
+        #     min_price = min(i, min_price)
+        # return max_profit
+        # dp2
+        dp_i_0, dp_i_1 = 0, float("-inf")
         for i in prices:
-            max_profit = max(i - min_price, max_profit)
-            min_price = min(i, min_price)
-        return max_profit
+            # 今天未持有 = max(昨天未持有,昨天持有，今天卖了)
+            dp_i_0 = max(dp_i_0, dp_i_1 + i)
+            # 今天持有 = max(昨天持有，昨天未持有，今天买了)
+            dp_i_1 = max(dp_i_1, -i)
+        return dp_i_0
 
 
 a = Solution().maxProfit([7,1,5,3,6,4])
