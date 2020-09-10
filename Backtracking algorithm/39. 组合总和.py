@@ -41,36 +41,36 @@ candidate 中的每个元素都是独一无二的。
 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        candidates = sorted(candidates)
+        # candidates = sorted(candidates)
         result = []
         # 标准回溯
-        # def help(current_list, start):
-        #     current_sum = sum(current_list)
-        #     if current_sum == target:
-        #         result.append(current_list[:])
-        #     elif current_sum > target:
-        #         return
-        #     else:
-        #         for i in range(start, len(candidates)):
-        #             if candidates[i] > target:
-        #                 return
-        #             current_list.append(candidates[i])
-        #             help(current_list, i)
-        #             current_list.pop()
-        # help([], 0)
-        # return result
+        def help(current_list, start):
+            current_sum = sum(current_list)
+            if current_sum == target:
+                result.append(current_list[:])
+            elif current_sum > target:
+                return
+            else:
+                for i in range(start, len(candidates)):
+                    if candidates[i] > target:
+                        return
+                    current_list.append(candidates[i])
+                    help(current_list, i)
+                    current_list.pop()
+        help([], 0)
+        return result
 
         # 优化回溯-
-        def help(current_list, start, target):
-            for i in range(start, len(candidates)):
-                if candidates[i] > target:
-                    return
-                elif candidates[i] == target:
-                    result.append(current_list + [candidates[i]])
-                else:
-                    help(current_list + [candidates[i]], i, target - candidates[i])
-        help([], 0, target)
-        return result
+        # def help(current_list, start, target):
+        #     for i in range(start, len(candidates)):
+        #         if candidates[i] > target:
+        #             return
+        #         elif candidates[i] == target:
+        #             result.append(current_list + [candidates[i]])
+        #         else:
+        #             help(current_list + [candidates[i]], i, target - candidates[i])
+        # help([], 0, target)
+        # return result
 
 a = Solution().combinationSum([2,3,5, 1], 8)
 print(a)
