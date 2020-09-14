@@ -33,14 +33,28 @@ class TreeNode(object):
 
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
-        stack, res = [root], []
-        while stack:
-            i = stack.pop()
-            if isinstance(i, TreeNode):
-                stack.extend([i.right,i.val,i.left])
-            elif isinstance(i, int):
-                res.append(i)
+        # 迭代
+        # stack, res = [root], []
+        # while stack:
+        #     i = stack.pop()
+        #     if isinstance(i, TreeNode):
+        #         stack.extend([i.right,i.val,i.left])
+        #     elif isinstance(i, int):
+        #         res.append(i)
+        # return res
+        # 递归
+        res = self.digui(root, [])
         return res
+
+    def digui(self, root, res):
+        if not root:
+            return
+        self.digui(root.left, res)
+        res.append(root.val)
+        self.digui(root.right, res)
+        return res
+
+
 
 root = stringToTreeNode([1,"null",2,3])
 a = Solution().inorderTraversal(root)
