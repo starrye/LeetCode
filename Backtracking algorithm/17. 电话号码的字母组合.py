@@ -31,12 +31,16 @@ class Solution:
         result = []
         map = {"1":"", "2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
         def help(digits, temp):
+            # 满足条件 加入result 然后跳出当前递归
             if not len(digits):
                 result.append(temp)
                 return
             for dig in map[digits[0]]:
+                # 选择
                 temp += dig
+                # 进入递归
                 help(digits[1:], temp)
+                # 撤销选择，进入下次循环
                 temp = temp[:-1]
         help(digits, "")
         return result
