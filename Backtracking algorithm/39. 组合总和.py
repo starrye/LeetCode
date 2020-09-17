@@ -72,5 +72,5 @@ class Solution:
         # help([], 0, target)
         # return result
 
-a = Solution().combinationSum([2,3,5, 1], 8)
+a = Solution().combinationSum([2,3,5], 8)
 print(a)
