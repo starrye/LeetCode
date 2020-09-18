@@ -29,5 +29,15 @@ intervals[i][0] <= intervals[i][1]
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        for index, interval in enumerate(intervals):
-            pass
+        if len(intervals) == 1:
+            return intervals
+        intervals.sort(key=lambda x: x[0])
+        merge = []
+        for interval in intervals:
+            if not merge or interval[0] > merge[-1][-1]:
+                merge.append(interval)
+            else:
+                merge[-1][-1] = max(merge[-1][-1], interval[1])
+        return merge
+
+
