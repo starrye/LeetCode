@@ -29,6 +29,8 @@ from typing import List
 1 <= A[i].length <= 100
 A[i][j] 是小写字母
 """
+
+
 from functools import reduce
 class Solution:
     def commonChars(self, A: List[str]) -> List[str]:
