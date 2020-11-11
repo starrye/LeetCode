@@ -38,7 +38,7 @@ class Solution(object):
         return third
 
 
-a = Solution().thirdMax([1,2,-2147483648])
+a = Solution().thirdMax([1,1,2])
 print(a)
 
 
