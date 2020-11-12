@@ -39,15 +39,26 @@ class Solution:
                     return nums
                 # 第二种情况：排序后找到可以替换当前位置的数字
                 else:
-                    nums[begin:] = sorted(nums[begin:])
+                    self.reverse(nums, begin)
+                    # 这里不实用切片是因为不符合空间要求为1
+                    # nums[begin:] = sorted(nums[begin:])
                     j = bisect.bisect(nums, nums[begin - 1], lo=begin)
+                    # for j in range(begin, len(nums)):
+                    #     if nums[j] > nums[i]:
                     nums[i], nums[j] = nums[j], nums[i]
                     return nums
             else:
                 begin = i
         if begin == 0:
-            nums.sort()
+            self.reverse(nums)
             return nums
+
+    def reverse(self, nums, begin=0):
+        length = len(nums) - 1
+        while begin < length:
+            nums[begin], nums[length] = nums[length], nums[begin]
+            begin += 1
+            length -= 1
 
 a = Solution().nextPermutation([1,3,2])
 print(a)
