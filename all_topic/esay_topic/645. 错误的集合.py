@@ -33,12 +33,18 @@ class Solution:
         #         repeat_num = nums[i]
         # return [repeat_num, correct_sum - current_sums + repeat_num]
 
-        #位运算！！！！
+        # 位运算！！！！
+        # 1.先利用 1到n的数组与当前数组的异或 得到一个结果 为 重复数字与缺失的数字的结果
+        # ps: 比如当前数组为1224 与 1234 异或 原数组的2 2消除了 那么两个数组异或结果为2 3 因为其他元素都是重复的。
+        # 2.在异或结果 xor 的二进制中，值为 1 的位置表示 x 和 y 在该位置的值不同，
+        # 值为 0 的位置表示 x 和 y 在该位置的值相同。我们称 xor 最右边比特位为 rightmostbit，且使该位置为 1
+        # 根据最后一位将数组分为两部分
         idx = [i for i in range(1, len(nums)+1)]
         a, b = self.findTwoNums(nums+idx)
         if a in nums:
             return [a, b]
         return [b, a]
+
     def findTwoNums(self,nums):
         all_xor = 0
         for num in nums:
