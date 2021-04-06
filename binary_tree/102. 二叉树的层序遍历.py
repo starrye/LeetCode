@@ -34,24 +34,37 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        """
+
+        :param root:
+        :return:
+        """
+        # 1 边界条件
         if not root:
             return []
         result = []
         from collections import deque
         queue = deque()
+        # 2 初始化队列
         queue.append(root)
         while queue:
+            # 3 获取当前层里面元素的个数
+            qsize = len(queue)
+            # 4 当前层的结果存放于列表中
             current_layer_list = []
-            next_layer = []
-            while queue:
+            # 5 遍历当前层的每个节点
+            while qsize:
                 current_layer_elm = queue.popleft()
+                qsize -= 1
+                # 6 结果存放到当前层中
                 current_layer_list.append(current_layer_elm.val)
+                # 7 把下一层的结点入队，需满足非空
                 if current_layer_elm.left is not None:
-                    next_layer.append(current_layer_elm.left)
+                    queue.append(current_layer_elm.left)
                 if current_layer_elm.right is not None:
-                    next_layer.append(current_layer_elm.right)
+                    queue.append(current_layer_elm.right)
             result.append(current_layer_list)
-            queue = deque(next_layer)
         return result
