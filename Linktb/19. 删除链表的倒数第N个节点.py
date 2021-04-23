@@ -43,13 +43,38 @@ class Solution:
         # q.next = q.next.next
         # return ans.next
 
-        p = q = head
-        while p:
-            if n < 0:
-                q = q.next
+        # p = q = head
+        # while p:
+        #     if n < 0:
+        #         q = q.next
+        #     n -= 1
+        #     p = p.next
+        # if n == 0:
+        #     return head.next
+        # q.next = q.next.next
+        # return head
+
+        """
+        在原链表前面加上 dummy，变成带假头的链表
+        front 指针从 dummy 开始，走 k 步，然后停下来
+        back 指针指向链表 dummy 假头
+        然后两个指针再一起走
+        当 front 指针指向最后一个结点时，back 指针刚好指向倒数第 k 个结点的前驱。
+        """
+        dummy = ListNode(0)
+        dummy.next = head
+        first = dummy
+        second = dummy
+
+        while n > 0 and first and first.next:
+            first = first.next
             n -= 1
-            p = p.next
+
+        while first and first.next:
+            first = first.next
+            second = second.next
+        # 如果k小于等于链表的长度
         if n == 0:
-            return head.next
-        q.next = q.next.next
-        return head
+            second.next = second.next.next
+
+        return dummy.next

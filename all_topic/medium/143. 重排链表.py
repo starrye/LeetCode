@@ -34,29 +34,74 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
+        # 原链表操作
+        # if not head:
+        #     return
+        # slow, fast = head, head
+        # while fast and fast.next:
+        #     fast = fast.next.next
+        #     slow = slow.next
+        # # 翻转
+        # pre, cur = None, slow.next
+        # # 前后断开
+        # slow.next = None
+        # while cur:
+        #     temp = cur.next
+        #     cur.next = pre
+        #     pre = cur
+        #     cur = temp
+        #
+        # # 拼接
+        # p, q = head, pre
+        # while q:
+        #     temp = p.next
+        #     p.next = q
+        #     p, q = q, temp
 
-        if not head:
-            return
-        slow, fast = head, head
+        # 新链表
+        mid = self.findMidNode(head)
+        back = self.reverse(mid.next)
+        mid.next = None
+        front = head
+
+        dummy = ListNode()
+        tail = dummy
+
+        is_front = True
+        while front or back:
+            if is_front and front:
+                tail.next = front
+                tail = tail.next
+                front = front.next
+            else:
+                tail.next = back
+                tail = tail.next
+                back = back.next
+            is_front = not is_front
+
+    def reverse(self, head):
+        dummy = ListNode()
+        dummy.next = None
+        while head:
+            temp = head.next
+            head.next = dummy.next
+            dummy.next = head
+            head = temp
+        return dummy.next
+
+    def findMidNode(self, head):
+        dummy = ListNode()
+        dummy.next = head
+        pre = dummy
+        fast = slow = head
         while fast and fast.next:
+            pre = slow
             fast = fast.next.next
             slow = slow.next
-        # 翻转
-        pre, cur = None, slow.next
-        # 前后断开
-        slow.next = None
-        while cur:
-            temp = cur.next
-            cur.next = pre
-            pre = cur
-            cur = temp
-
-        # 拼接
-        p, q = head, pre
-        while q:
-            temp = p.next
-            p.next = q
-            p, q = q, temp
+        if fast:
+            return slow
+        else:
+            return pre
 
 
 def stringToIntegerList(input):
@@ -92,7 +137,7 @@ def listNodeToString(node):
 def main():
     try:
         # for line in ["1","2","3","4"]:
-        head = stringToListNode([1,2,3,4]);
+        head = stringToListNode([1,2,3,4, 5]);
 
         ret = Solution().reorderList(head)
 

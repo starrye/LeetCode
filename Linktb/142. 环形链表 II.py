@@ -44,16 +44,24 @@ class Solution:
         # 1. 快指针走的是慢指针的2倍
         # 2. 走a + nb步一定在环入口 a为头到环入口 b为环长
         # 3. 第一次相遇时慢指针走了 nb步 结合2 慢指针只需要走a步即可到环入口
-        fast = slow = head
-        while True:
-            if not fast or not fast.next:
-                return
+        if not head or not head.next:
+            return None
+        slow = fast = head
+        while fast and fast.next:
             fast = fast.next.next
             slow = slow.next
-            if slow == fast:
-                 break
-        fast = head
-        while fast != slow:
-            fast = fast.next
-            slow = slow.next
-        return fast
+            # 有环
+            if fast == slow:
+                # 寻找入口
+                # f为快指针走的长度 s为慢指针走的长度
+                # a为链表头到环入口的长度 b 为环的长度 n为走过环的圈数
+                # f = 2s f = s+nb ==> s = nb f = 2nb
+                # 则只需让s再走过a 此时s = a+nb则一定是入口处
+                # 怎么让s走a呢 就是 找个指针从头开始走 他们一定在入口处相遇
+                # 因为 从头走过a 与 a+nb都是环入口
+                fast = head
+                while fast != slow:
+                    fast = fast.next
+                    slow = slow.next
+                return slow
+        return None
