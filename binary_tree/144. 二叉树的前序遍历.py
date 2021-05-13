@@ -31,15 +31,27 @@ from typing import List
 #         self.right = right
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
-        if not root:
-            return
-        stack = [root]
-        result = []
-        while stack:
-            node = stack.pop()
-            result.append(node.val)
-            if node.right:
-                stack.append(node.right)
-            if node.left:
-                stack.append(node.left)
-        return result
+
+        # 递归
+        def help(root):
+            if root:
+                stack.append(root.val)
+                help(root.left)
+                help(root.right)
+        stack = list()
+        help(root)
+        return stack
+
+        # 迭代
+        # if not root:
+        #     return
+        # stack = [root]
+        # result = []
+        # while stack:
+        #     node = stack.pop()
+        #     result.append(node.val)
+        #     if node.right:
+        #         stack.append(node.right)
+        #     if node.left:
+        #         stack.append(node.left)
+        # return result

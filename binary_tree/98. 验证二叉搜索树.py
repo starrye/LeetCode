@@ -43,6 +43,7 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
+        # 影子区间
         # def help(node, min_, max_):
         #     if not node:
         #         return True
@@ -53,16 +54,44 @@ class Solution:
         # return help(root, float('-inf'), float('inf'))
 
         # 中序遍历
-        self.pre = float('-inf')
-        def help(node):
-            if not node:
-                return True
-            if not help(node.left):
-                return False
-            if node.val <= self.pre:
-                return False
-            self.pre = node.val
-            return help(node.right)
+        # self.pre = float('-inf')
+        # def help(node):
+        #     if not node:
+        #         return True
+        #     if not help(node.left):
+        #         return False
+        #     if node.val <= self.pre:
+        #         return False
+        #     self.pre = node.val
+        #     return help(node.right)
+        #
+        # return help(root)
 
-        return help(root)
+        # 后序遍历
+        # 其实是利用影子区间 判断是否符合二叉搜索树的性质(左子树<根<右子树) 因为后序遍历是 左右根 这个时候可以利用先遍历左右子树而确定一个
+        # 范围 然后最后到根的时候 判断根是否在此范围内 转而扩大区间转往上级
+        def __init__(self):
+            self.ans = True
+
+        def isValidBST(self, root: TreeNode) -> bool:
+            self.preOrder(root)
+            return self.ans
+
+        def preOrder(self, root):
+            # 叶子结点的时候应该返回的区间范围
+            if not root or not self.ans:
+                return float('inf'), float("-inf")
+
+            lmin, lmax = self.preOrder(root.left)
+            rmin, rmax = self.preOrder(root.right)
+
+            # 当前结点不在左右子树范围内 返回 并随意抛出区间
+            if not (root.val > lmax and root.val < rmin):
+                self.ans = False
+                return 0, 0
+            # 这里的min和max主要是为了 当lmin rmax来源于叶子结点 应该收缩区间 因为叶子结点的左右范围为[+inf, -inf] 应该收缩为[当前值，当前值]
+            return min(lmin, root.val), max(rmax, root.val)
+
+
+
 
