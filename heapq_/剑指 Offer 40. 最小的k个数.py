@@ -31,17 +31,18 @@ class Solution:
         import heapq
         # python只自带了小顶堆，我们需要取最小的k个数，则将队列里的数全部取负数放进去，然后找出最大的k个数 最后再取反即可
 
-        # heap = [-num for num in arr]  # creates an empty heap
+        heap = [num for num in arr]  # creates an empty heap
         #
-        # heapq.heapify(heap)  # transforms list into a heap, in-place, in linear timea
+        heapq.heapify(heap)  # transforms list into a heap, in-place, in linear timea
         #
         # for i in range(k, len(arr)):
         #     heapq.heappop(heap)  # pops the smallest item from the heap
         # return [-num for num in heap]
+        return [heapq.heappop(heap) for _ in range(k)]
 
         """nsmallest   :   Find the n smallest elements in a dataset."""
-        return heapq.nsmallest(k, arr)
+        # return heapq.nsmallest(k, arr)
 
 
-a = Solution().getLeastNumbers([3,2,1], 2)
+a = Solution().getLeastNumbers([4, 5,1,6,2,7,3,8], 3)
 print(a)
