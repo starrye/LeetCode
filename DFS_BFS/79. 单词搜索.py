@@ -6,6 +6,7 @@
 @time: 2020/9/29 16:59
 @desc: 
 """
+from collections import deque
 from typing import List
 """
 给定一个二维网格和一个单词，找出该单词是否存在于网格中。
@@ -32,35 +33,48 @@ board 和 word 中只包含大写和小写英文字母。
 1 <= word.length <= 10^3
 """
 
+
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         rows = len(board)
         cols = len(board[0])
-        use_location = set()
-        def dfs(row, col, word):
-            if not len(word):
-                return True
-            flag = False
-            if board[row][col] == word[0]:
-                if len(word) == 1:
+        begin_point = []
+        for i in range(rows):
+            for j in range(cols):
+                if board[i][j] == word[0]:
+                    begin_point.append([i, j])
+
+        direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        for b_row, b_col in begin_point:
+            queue_ = deque()
+            used = set()
+            used.add((b_row, b_col))
+            word_index = 1
+            queue_.append([b_row, b_col])
+
+            while queue_:
+                flag = False
+                if word_index == len(word):
                     return True
-                # nonlocal use_location
-                use_location.add((row, col))
-                for d_row, d_col in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
-                    new_row, new_col = row+d_row, col+d_col
-                    if rows > new_row >= 0 and cols > new_col >= 0 and (new_row, new_col) not in use_location:
-                        flag = flag or dfs(new_row, new_col, word[1:])
-                use_location.remove((row, col))
-            return flag
-        for row in range(len(board)):
-            for col in range(len(board[0])):
-                if dfs(row, col, word):
-                    return True
+                row, col = queue_.popleft()
+                for drow, dcol in direction:
+                    nrow, ncol = row + drow, col + dcol
+
+                    if 0 <= nrow < rows and 0 <= ncol < cols and (nrow, ncol) not in used:
+                        if board[nrow][ncol] == word[word_index]:
+                            flag = True
+                            if word_index == len(word):
+                                return True
+                            used.add((nrow, ncol))
+                            queue_.append([nrow, ncol])
+                if flag:
+                    word_index += 1
         return False
 
 
 
-a = Solution().exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],"ABCCED")
+a = Solution().exist([["C","A","A"],["A","A","A"],["B","C","D"]]
+, "AAB")
 print(a)
 
 
