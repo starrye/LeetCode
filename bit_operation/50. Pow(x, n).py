@@ -38,22 +38,32 @@ class Solution:
         #     y = quickPow(N//2)
         #     return y * y if not N % 2 else y * y * x
         # return quickPow(n) if n >= 0 else 1.0 / quickPow(-n)
+        #
+        # if n == 0:
+        #     return 1
+        # if n == 1:
+        #     return x
+        # res = 1
+        # tmp_n = abs(n)
+        # while tmp_n:
+        #     if tmp_n & 1:
+        #        res *= x
+        #     x *= x
+        #     tmp_n >>= 1
+        # return res if n > 0 else 1/res
 
-        if n == 0:
-            return 1
-        if n == 1:
-            return x
-        res = 1
-        tmp_n = abs(n)
-        while tmp_n:
-            if tmp_n & 1:
-               res *= x
+
+        ans = 1
+        a_n = abs(n)
+        while a_n:
+            if a_n & 1:
+                ans *= x
             x *= x
-            tmp_n >>= 1
-        return res if n > 0 else 1/res
+            a_n >>= 1
+        return ans if n > 0 else 1 / ans
 
 
 
 
-a = Solution().myPow(2,-2)
+a = Solution().myPow(2,10)
 print(a)

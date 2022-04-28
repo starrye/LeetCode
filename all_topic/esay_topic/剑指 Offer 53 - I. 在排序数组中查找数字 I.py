@@ -65,5 +65,4 @@ class Solution:
         return None
 
 a = Solution().search([5,7,7,8,8,8,10], 8)
-print(a)
-
+# print(a)

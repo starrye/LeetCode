@@ -39,13 +39,22 @@ class Solution:
         #     n -= 3
         # ans *= n
         # return ans
-        dp = [1, 1, 1, 2, 4, 6, 9]
-        if n <= 6:
-            return dp[n]
-        for i in range(7, n + 1):
-            dp.append(dp[i - 3] * 3)
-        return dp[-1]
+        # dp = [1, 1, 1, 2, 4, 6, 9]
+        # if n <= 6:
+        #     return dp[n]
+        # for i in range(7, n + 1):
+        #     dp.append(dp[i - 3] * 3)
+        # return dp[-1]
 
+        dp = [1, 1, 2, 4]
+        if n <= 4:
+            return dp[n-1]
+        ans = 1
+        while n > 4:
+            ans *= 3
+            n -= 3
+        ans *= n
+        return ans
 
 a = Solution().integerBreak(10)
 print(a)
