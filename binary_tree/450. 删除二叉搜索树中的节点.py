@@ -54,39 +54,57 @@ class TreeNode:
 
 class Solution:
     def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        # if not root:
+        #     return
+        # # 如果当前结点比目标结点值小 则往右子树寻找
+        # if root.val < key:
+        #     root.right = self.deleteNode(root.right, key)
+        #
+        # # 如果当前结点比目标结点值大 则往左子树寻找
+        # elif root.val > key:
+        #     root.left = self.deleteNode(root.left, key)
+        #
+        # # 当前结点为目标结点
+        # else:
+        #     # 如果当前结点为叶子结点 则返回None
+        #     if (not root.right) and (not root.left):
+        #         return None
+        #
+        #     # 如果当前结点有左子树
+        #     elif root.left:
+        #         node = root.left
+        #         # 找到左子树的最右侧结点 即跟当前结点最接近的结点 也是可以替换当前结点的结点
+        #         while node.right:
+        #             node = node.right
+        #         # 这里只是更换值 目的是把要替换的结点放到叶子结点 才能删除
+        #         root.val, node.val = node.val, root.val
+        #         root.left = self.deleteNode(root.left, key)
+        #
+        #     # 如果当前结点有右子树(这里与上述先判断左子树逻辑可以互换 因为 左子树的最右侧结点  当前结点 右子树的最左侧结点 是相邻的)
+        #     elif root.right:
+        #         node = root.right
+        #         # 找到右子树的最左侧结点 即跟当前结点最接近的结点 也是可以替换当前结点的结点
+        #         while node.left:
+        #             node = node.left
+        #         root.val, node.val = node.val, root.val
+        #         root.right = self.deleteNode(root.right, key)
+        #
+        # return root
+
         if not root:
             return
-        # 如果当前结点比目标结点值小 则往右子树寻找
-        if root.val < key:
+        if root.val == key:
+            if not root.left:
+                return root.right
+            if not root.right:
+                return root.left
+            left_max = root.left
+            while left_max.right:
+                left_max = left_max.right
+            left_max.right = root.right
+            return root.left
+        elif root.val < key:
             root.right = self.deleteNode(root.right, key)
-
-        # 如果当前结点比目标结点值大 则往左子树寻找
-        elif root.val > key:
-            root.left = self.deleteNode(root.left, key)
-
-        # 当前结点为目标结点
         else:
-            # 如果当前结点为叶子结点 则返回None
-            if (not root.right) and (not root.left):
-                return None
-
-            # 如果当前结点有左子树
-            elif root.left:
-                node = root.left
-                # 找到左子树的最右侧结点 即跟当前结点最接近的结点 也是可以替换当前结点的结点
-                while node.right:
-                    node = node.right
-                # 这里只是更换值 目的是把要替换的结点放到叶子结点 才能删除
-                root.val, node.val = node.val, root.val
-                root.left = self.deleteNode(root.left, key)
-
-            # 如果当前结点有右子树(这里与上述先判断左子树逻辑可以互换 因为 左子树的最右侧结点  当前结点 右子树的最左侧结点 是相邻的)
-            elif root.right:
-                node = root.right
-                # 找到右子树的最左侧结点 即跟当前结点最接近的结点 也是可以替换当前结点的结点
-                while node.left:
-                    node = node.left
-                root.val, node.val = node.val, root.val
-                root.right = self.deleteNode(root.right, key)
-
+            root.left = self.deleteNode(root.left, key)
         return root
