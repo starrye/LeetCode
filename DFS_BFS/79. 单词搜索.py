@@ -73,8 +73,7 @@ class Solution:
 
 
 
-a = Solution().exist([["C","A","A"],["A","A","A"],["B","C","D"]]
-, "AAB")
+a = Solution().exist([["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]],"ABCESEEEFS")
 print(a)
 
 
