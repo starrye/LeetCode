@@ -19,3 +19,14 @@ def binary_search(nums,target):
 """
 # 在array的前index元素中寻找value值对应的索引(若没有该值，则返回应该插入的位置)
 bisect.bisect(array, value, hi=index)
+
+# 让返回符合条件的x尽量小，牺牲一部分性能 但是保证x一定在元素中
+while (left < right) {
+    int x = left + (right - left) / 2;
+    // ...
+    if (count >= k) {
+        right = x;
+    } else {
+        left = x + 1;
+    }
+}
