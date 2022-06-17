@@ -57,11 +57,8 @@ class Solution:
             if v in interval:
                 for j in interval[v]:
                     diff.add((v, j) if v <= j else (j, v))
-                    # print(diff)
             interval[v-k].add(v)
             interval[v+k].add(v)
-        # print(interval)
-        # print(diff)
         return len(diff)
 
 a = Solution().findPairs([3,1,4,1,5], 2)
